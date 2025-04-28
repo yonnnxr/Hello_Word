@@ -30,8 +30,8 @@
         attribution: '© OpenStreetMap'
     }).addTo(map);
 
-    // Carrega o arquivo GeoJSON (convertido do KML)
-    fetch('Piraputanga.json')
+    // CORRIGIDO: agora buscando da rota /dados
+    fetch('https://api-geo-ymve.onrender.com/dados')
       .then(response => response.json())
       .then(geojsonData => {
         var geojsonLayer = L.geoJSON(geojsonData, {
@@ -45,6 +45,9 @@
         }).addTo(map);
 
         map.fitBounds(geojsonLayer.getBounds());
+      })
+      .catch(error => {
+        console.error('Erro ao carregar dados:', error);
       });
 </script>
 
