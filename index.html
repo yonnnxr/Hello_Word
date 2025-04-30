@@ -53,31 +53,33 @@
     maxZoom: 22
   }).addTo(map);
 
-  map.setMaxZoom(22); 
-
-  var markers = L.markerClusterGroup({
-    iconCreateFunction: function (cluster) {
-      var count = cluster.getChildCount();
-      var size = 'small';
-      if (count >= 100) {
-        size = 'large';
-      } else if (count >= 10) {
-        size = 'medium';
-      }
-      return new L.DivIcon({
-        html: `<div><span>${count}</span></div>`,
-        className: 'marker-cluster marker-cluster-' + size,
-        iconSize: new L.Point(40, 40)
-      });
-    }
-  });
+  var markers = L.markerClusterGroup({ /* ...config... */ });
 
   fetch('https://api-geo-ymve.onrender.com/dados')
     .then(res => res.json())
     .then(data => {
       var geoJsonLayer = L.geoJSON(data, {
-        pointToLayer: function (feature, latlng) {
-          return L.marker(latlng);
+        pointToLayer: (feature, latlng) => L.marker(latlng),
+        onEachFeature: function (feature, layer) {
+          let popup = '';
+          for (const key in feature.properties) {
+            popup += `<strong>${key}</strong>: ${feature.properties[key]}<br>`;
+          }
+          layer.bindPopup(popup);
+        }
+      });
+      markers.addLayer(geoJsonLayer);
+      map.addLayer(markers);
+      map.fitBounds(markers.getBounds());
+    });
+
+  fetch('https://api-geo-ymve.onrender.com/redes_agua')
+    .then(res => res.json())
+    .then(data => {
+      var redeAguaLayer = L.geoJSON(data, {
+        style: {
+          color: 'blue',
+          weight: 3
         },
         onEachFeature: function (feature, layer) {
           let popup = '';
@@ -87,12 +89,8 @@
           layer.bindPopup(popup);
         }
       });
-
-      markers.addLayer(geoJsonLayer);
-      map.addLayer(markers);
-      map.fitBounds(markers.getBounds());
-    })
-    .catch(error => console.error("Erro ao carregar dados:", error));
+      map.addLayer(redeAguaLayer);
+    });
 </script>
 
 </body>
