@@ -11,7 +11,7 @@ let pontosCluster = L.markerClusterGroup();
 let pontosLayer, redesLayer, quadrasLayer;
 
 // Pontos
-fetch(`${API_URL}/dados`)
+fetch('https://api-geo-ymve.onrender.com/dados')
   .then(res => res.json())
   .then(data => {
     pontosLayer = L.geoJSON(data, {
@@ -30,7 +30,7 @@ fetch(`${API_URL}/dados`)
   });
 
 // Redes de Água
-fetch(`${API_URL}/redes_agua`)
+fetch('https://api-geo-ymve.onrender.com/redes_agua')
   .then(res => res.json())
   .then(data => {
     redesLayer = L.geoJSON(data, {
@@ -47,7 +47,7 @@ fetch(`${API_URL}/redes_agua`)
   });
 
 // Quadras
-fetch(`${API_URL}/quadras`)
+fetch('https://api-geo-ymve.onrender.com/quadras')
   .then(res => res.json())
   .then(data => {
     quadrasLayer = L.geoJSON(data, {
