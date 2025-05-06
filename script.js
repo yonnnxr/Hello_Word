@@ -64,7 +64,7 @@ fetch('https://api-geo-ymve.onrender.com/quadras')
   .then(res => res.json())
   .then(data => {
     quadrasLayer = L.geoJSON(data, {
-      style: { color: 'green', weight: 2, fillOpacity: 0.3 },
+      style: { color: 'green', weight: 2, fillOpacity: 0.2 },
       onEachFeature: (feature, layer) => {
         let popup = '';
         for (const key in feature.properties) {
@@ -76,7 +76,6 @@ fetch('https://api-geo-ymve.onrender.com/quadras')
     map.addLayer(quadrasLayer);
   })
   .catch(err => console.error("Erro ao carregar quadras:", err));
-
 // Toggles
 document.getElementById('togglePontos').addEventListener('change', function () {
   this.checked ? map.addLayer(markers) : map.removeLayer(markers);
