@@ -1,5 +1,3 @@
-const API_URL = "https://api-geo-ymve.onrender.com";
-
 const map = L.map('map').setView([-20.4799, -55.5368], 15);
 
 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -7,8 +5,22 @@ L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
   maxZoom: 22
 }).addTo(map);
 
-let pontosCluster = L.markerClusterGroup();
 let pontosLayer, redesLayer, quadrasLayer;
+
+const markers = L.markerClusterGroup({
+  iconCreateFunction: function (cluster) {
+    const count = cluster.getChildCount();
+    let size = 'small';
+    if (count >= 100) size = 'large';
+    else if (count >= 10) size = 'medium';
+
+    return new L.DivIcon({
+      html: `<div><span>${count}</span></div>`,
+      className: 'marker-cluster marker-cluster-' + size,
+      iconSize: new L.Point(40, 40)
+    });
+  }
+});
 
 // Pontos
 fetch('https://api-geo-ymve.onrender.com/dados')
@@ -24,17 +36,17 @@ fetch('https://api-geo-ymve.onrender.com/dados')
         layer.bindPopup(popup);
       }
     });
-    pontosCluster.addLayer(pontosLayer);
-    map.addLayer(pontosCluster);
-    pontosLayer._cluster = pontosCluster;
-  });
+    markers.addLayer(pontosLayer);
+    map.addLayer(markers);
+  })
+  .catch(err => console.error("Erro ao carregar pontos:", err));
 
-// Redes de Água
+// Redes de água
 fetch('https://api-geo-ymve.onrender.com/redes_agua')
   .then(res => res.json())
   .then(data => {
     redesLayer = L.geoJSON(data, {
-      style: { color: 'blue', weight: 2 },
+      style: { color: 'blue', weight: 3 },
       onEachFeature: (feature, layer) => {
         let popup = '';
         for (const key in feature.properties) {
@@ -44,14 +56,15 @@ fetch('https://api-geo-ymve.onrender.com/redes_agua')
       }
     });
     map.addLayer(redesLayer);
-  });
+  })
+  .catch(err => console.error("Erro ao carregar redes de água:", err));
 
 // Quadras
 fetch('https://api-geo-ymve.onrender.com/quadras')
   .then(res => res.json())
   .then(data => {
     quadrasLayer = L.geoJSON(data, {
-      style: { color: 'green', fillOpacity: 0.3, weight: 1 },
+      style: { color: 'green', weight: 2, fillOpacity: 0.3 },
       onEachFeature: (feature, layer) => {
         let popup = '';
         for (const key in feature.properties) {
@@ -61,24 +74,18 @@ fetch('https://api-geo-ymve.onrender.com/quadras')
       }
     });
     map.addLayer(quadrasLayer);
-  });
+  })
+  .catch(err => console.error("Erro ao carregar quadras:", err));
 
-// Controle de camadas
+// Toggles
 document.getElementById('togglePontos').addEventListener('change', function () {
-  const cluster = pontosLayer?._cluster;
-  if (cluster) {
-    this.checked ? map.addLayer(cluster) : map.removeLayer(cluster);
-  }
+  this.checked ? map.addLayer(markers) : map.removeLayer(markers);
 });
 
 document.getElementById('toggleRedes').addEventListener('change', function () {
-  if (redesLayer) {
-    this.checked ? map.addLayer(redesLayer) : map.removeLayer(redesLayer);
-  }
+  this.checked ? map.addLayer(redesLayer) : map.removeLayer(redesLayer);
 });
 
 document.getElementById('toggleQuadras').addEventListener('change', function () {
-  if (quadrasLayer) {
-    this.checked ? map.addLayer(quadrasLayer) : map.removeLayer(quadrasLayer);
-  }
+  this.checked ? map.addLayer(quadrasLayer) : map.removeLayer(quadrasLayer);
 });
