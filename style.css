@@ -76,3 +76,13 @@ html, body {
   display: none;
   z-index: 3000;
 }
+
+#logo {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+#logo-img {
+  max-width: 80%;
+  height: auto;
+}
