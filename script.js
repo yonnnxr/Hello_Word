@@ -1,9 +1,10 @@
-var map = L.map('map').setView([-20.4799, -55.5368], 15);
+var map = L.map('map').setView([-22.2307, -54.8206], 17);
 
-L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-  attribution: '© OpenStreetMap',
-  maxZoom: 22
+L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
+  attribution: '&copy; <a href="https://carto.com/">CartoDB</a>',
+  maxZoom: 20
 }).addTo(map);
+
 
 let pontosLayer, redesLayer, quadrasLayer;
 
