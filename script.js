@@ -69,13 +69,12 @@ const mapDiv = document.getElementById('map');
 const menuToggle = document.getElementById('menu-toggle');
 const closeBtn = document.getElementById('close-btn');
 
-function openSidebar() {
+// Abrir sidebar
+menuToggle.addEventListener('click', () => {
   sidebar.classList.add('open');
-}
+});
 
-function closeSidebar() {
+// Fechar sidebar
+closeBtn.addEventListener('click', () => {
   sidebar.classList.remove('open');
-}
-
-menuToggle.addEventListener('click', openSidebar);
-closeBtn.addEventListener('click', closeSidebar);
+});
