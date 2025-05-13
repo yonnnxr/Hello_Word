@@ -1,3 +1,9 @@
+body, html {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  font-family: Arial, sans-serif;
+}
 
 #map {
   position: absolute;
@@ -10,18 +16,18 @@
 
 #sidebar {
   position: absolute;
-  left: -250px;
   top: 0;
+  left: -250px;
   width: 250px;
   height: 100%;
-  background-color: #ffffff;
+  background: #fff;
   box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
   padding: 20px;
   box-sizing: border-box;
   z-index: 1000;
   overflow-y: auto;
-  border-right: 1px solid #ddd;
   transition: left 0.3s;
+  border-right: 1px solid #ddd;
 }
 
 #sidebar.open {
@@ -33,7 +39,7 @@
   width: calc(100% - 250px);
 }
 
-#menu-toggle {
+.menu-toggle {
   font-size: 24px;
   border: none;
   background: none;
@@ -45,7 +51,7 @@
   z-index: 1100;
 }
 
-#close-btn {
+.close-btn {
   font-size: 30px;
   border: none;
   background: none;
@@ -59,45 +65,29 @@
 }
 
 #sidebar h2 {
-  font-size: 20px;
   margin-top: 60px;
+  font-size: 20px;
   margin-bottom: 20px;
 }
 
+.layer-toggle {
+  margin-bottom: 15px;
+}
+
+#loadingMessage {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: rgba(0, 0, 0, 0.7);
+  color: white;
+  padding: 10px;
+  display: none;
+}
+
 @media (max-width: 768px) {
-  #sidebar {
-    left: -250px;
-  }
-
-  #sidebar.open {
-    left: 0;
-  }
-
-  #map {
-    left: 0;
-    width: 100%;
-  }
-
   #sidebar.open ~ #map {
     left: 0;
     width: 100%;
-  }
-
-  #menu-toggle {
-    display: block;
-  }
-
-  #close-btn {
-    display: block;
-  }
-}
-
-@media (min-width: 769px) {
-  #menu-toggle {
-    display: block;
-  }
-
-  #close-btn {
-    display: block;
   }
 }
