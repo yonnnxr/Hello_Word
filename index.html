@@ -18,8 +18,21 @@
       <div class="layer-toggle">
         <input type="checkbox" id="togglePontos" checked />
         <label for="togglePontos">Imóveis em construção</label>
-        <p id="quantitativo">Quantidade de Imóveis em construção: <strong>0</strong></p>
       </div>
+
+      <!-- Quantitativo -->
+      <div id="quantitativo">
+        <p>Total de imóveis: <strong>0</strong></p>
+      </div>
+    </div>
+
+    <!-- Indicador de Carregamento -->
+    <div id="loadingMessage" style="display:none;">
+      <p>Aguarde, a API está acordando...</p>
+    </div>
+    <div id="loadingSpinner" style="display:none;">
+      <img src="https://i.gifer.com/7plr.gif" alt="Carregando..." />
+      <p>Carregando dados...</p>
     </div>
 
     <!-- Mapa -->
