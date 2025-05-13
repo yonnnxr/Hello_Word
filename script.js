@@ -40,51 +40,7 @@ fetch('https://api-geo-ymve.onrender.com/dados')
     map.addLayer(markers);
   })
   .catch(err => console.error("Erro ao carregar pontos:", err));
-
-// Redes de água
-fetch('https://api-geo-ymve.onrender.com/redes_agua')
-  .then(res => res.json())
-  .then(data => {
-    redesLayer = L.geoJSON(data, {
-      style: { color: 'blue', weight: 3 },
-      onEachFeature: (feature, layer) => {
-        let popup = '';
-        for (const key in feature.properties) {
-          popup += `<strong>${key}</strong>: ${feature.properties[key]}<br>`;
-        }
-        layer.bindPopup(popup);
-      }
-    });
-    map.addLayer(redesLayer);
-  })
-  .catch(err => console.error("Erro ao carregar redes de água:", err));
-
-// Quadras
-fetch('https://api-geo-ymve.onrender.com/quadras')
-  .then(res => res.json())
-  .then(data => {
-    quadrasLayer = L.geoJSON(data, {
-      style: { color: 'green', weight: 2, fillOpacity: 0.2 },
-      onEachFeature: (feature, layer) => {
-        let popup = '';
-        for (const key in feature.properties) {
-          popup += `<strong>${key}</strong>: ${feature.properties[key]}<br>`;
-        }
-        layer.bindPopup(popup);
-      }
-    });
-    map.addLayer(quadrasLayer);
-  })
-  .catch(err => console.error("Erro ao carregar quadras:", err));
 // Toggles
 document.getElementById('togglePontos').addEventListener('change', function () {
   this.checked ? map.addLayer(markers) : map.removeLayer(markers);
-});
-
-document.getElementById('toggleRedes').addEventListener('change', function () {
-  this.checked ? map.addLayer(redesLayer) : map.removeLayer(redesLayer);
-});
-
-document.getElementById('toggleQuadras').addEventListener('change', function () {
-  this.checked ? map.addLayer(quadrasLayer) : map.removeLayer(quadrasLayer);
 });
