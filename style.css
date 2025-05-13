@@ -43,16 +43,13 @@ html {
   transform: scale(1.2);
 }
 
-#loadingMessage, #loadingSpinner {
+#loadingMessage {
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
   text-align: center;
   z-index: 9999;
-}
-
-#loadingMessage p, #loadingSpinner p {
   font-size: 18px;
   color: #333;
 }

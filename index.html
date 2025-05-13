@@ -5,14 +5,13 @@
     <title>Mapa</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <!-- Estilos do Leaflet -->
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css" />
     <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.css" />
     <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.Default.css" />
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
-    <!-- Sidebar -->
+
     <div id="sidebar">
       <h2>Camadas</h2>
       <div class="layer-toggle">
@@ -20,25 +19,19 @@
         <label for="togglePontos">Imóveis em construção</label>
       </div>
 
-      <!-- Quantitativo -->
+
       <div id="quantitativo">
         <p>Total de imóveis: <strong>0</strong></p>
       </div>
     </div>
 
-    <!-- Indicador de Carregamento -->
+
     <div id="loadingMessage" style="display:none;">
       <p>Aguarde, a API está acordando...</p>
     </div>
-    <div id="loadingSpinner" style="display:none;">
-      <img src="https://i.gifer.com/7plr.gif" alt="Carregando..." />
-      <p>Carregando dados...</p>
-    </div>
 
-    <!-- Mapa -->
     <div id="map"></div>
 
-    <!-- Scripts -->
     <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"></script>
     <script src="https://unpkg.com/leaflet.markercluster@1.5.3/dist/leaflet.markercluster.js"></script>
     <script src="script.js"></script>
