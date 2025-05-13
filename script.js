@@ -77,3 +77,12 @@ menuToggle.addEventListener('click', () => {
 closeBtn.addEventListener('click', () => {
   sidebar.classList.remove('open');
 });
+menuToggle.addEventListener('click', () => {
+  sidebar.classList.add('open');
+  menuToggle.style.display = 'none';
+});
+
+closeBtn.addEventListener('click', () => {
+  sidebar.classList.remove('open');
+  menuToggle.style.display = 'block';
+});

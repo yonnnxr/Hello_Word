@@ -51,7 +51,7 @@ html, body {
   border: none;
   color: #333;
   cursor: pointer;
-  z-index: 2000; /* PARA FICAR ACIMA DO MAPA */
+  z-index: 2000;
 }
 
 .close-btn {
