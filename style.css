@@ -45,7 +45,7 @@ html, body {
 .menu-toggle {
   position: absolute;
   top: 20px;
-  left: 20px;
+  left: 40px;
   font-size: 24px;
   background: none;
   border: none;
