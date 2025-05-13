@@ -1,14 +1,18 @@
+// Função para converter coordenadas de EPSG:3857 (metros) para EPSG:4326 (graus)
 function mercatorToLatLng(x, y) {
-  var lon = x / 20037508.34 * 180;
-  var lat = y / 20037508.34 * 180;
-  lat = 180 / Math.PI * (2 * Math.atan(Math.exp(lat * Math.PI / 180)) - Math.PI / 2);
-  return [lat, lon];
+  const lon = x / 20037508.34 * 180;
+  const lat = y / 20037508.34 * 180;
+  const rad = lat * Math.PI / 180;
+  const latOut = 180 / Math.PI * (2 * Math.atan(Math.exp(rad)) - Math.PI / 2);
+  return [latOut, lon];
 }
 
-var map = L.map('map').setView([-22.2307, -54.8206], 17);
+// Inicializa o mapa com um ponto aproximado já convertido
+const map = L.map('map').setView([-22.2307, -54.8206], 17);
 
+// Mapa base mais detalhado (CartoDB Positron)
 L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
-  attribution: '&copy; <a href="https://carto.com/">CartoDB',
+  attribution: '&copy; <a href="https://carto.com/">CartoDB</a>',
   maxZoom: 20
 }).addTo(map);
 
@@ -29,17 +33,19 @@ const markers = L.markerClusterGroup({
   }
 });
 
+// Carrega os dados dos pontos
 fetch('https://api-geo-ymve.onrender.com/dados')
   .then(res => res.json())
   .then(data => {
-    // Corrigir todas as coordenadas do GeoJSON para EPSG:4326
+    // Converte as coordenadas de todos os pontos
     data.features.forEach(feature => {
-      if (feature.geometry.type === "Point") {
+      if (feature.geometry.type === 'Point') {
         const [x, y] = feature.geometry.coordinates;
         feature.geometry.coordinates = mercatorToLatLng(x, y);
       }
     });
 
+    // Cria a camada de pontos
     pontosLayer = L.geoJSON(data, {
       pointToLayer: (feature, latlng) => L.marker(latlng),
       onEachFeature: (feature, layer) => {
@@ -56,6 +62,7 @@ fetch('https://api-geo-ymve.onrender.com/dados')
   })
   .catch(err => console.error("Erro ao carregar pontos:", err));
 
+// Controle da camada via checkbox
 document.getElementById('togglePontos').addEventListener('change', function () {
   this.checked ? map.addLayer(markers) : map.removeLayer(markers);
 });
