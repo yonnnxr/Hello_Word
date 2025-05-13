@@ -60,5 +60,11 @@ document.getElementById('togglePontos').addEventListener('change', function () {
 });
 
 document.getElementById('menu-toggle').addEventListener('click', function () {
-  document.getElementById('sidebar').classList.toggle('open');
+  document.getElementById('sidebar').classList.add('open');
+  document.getElementById('close-btn').style.display = 'block';
+});
+
+document.getElementById('close-btn').addEventListener('click', function () {
+  document.getElementById('sidebar').classList.remove('open');
+  document.getElementById('close-btn').style.display = 'none';
 });
