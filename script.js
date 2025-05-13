@@ -1,24 +1,17 @@
+var map = L.map('map').setView([-22.2049274382639, -54.8116765895665], 12);
 
-const map = L.map('map').setView([-22.223, -54.812], 12);
-
-const osmLayer = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
   attribution: '© OpenStreetMap',
   maxZoom: 19
 }).addTo(map);
 
-const satelliteLayer = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/' +
-  'World_Imagery/MapServer/tile/{z}/{y}/{x}', {
-  attribution: '© Esri',
+var satelliteLayer = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+  attribution: '© OpenStreetMap',
   maxZoom: 19
 });
 
-L.control.layers({
-  "Mapa": osmLayer,
-  "Satélite": satelliteLayer
-}).addTo(map);
-
 const markers = L.markerClusterGroup({
-  iconCreateFunction: cluster => {
+  iconCreateFunction: function (cluster) {
     const count = cluster.getChildCount();
     let size = 'small';
     if (count >= 100) size = 'large';
@@ -26,7 +19,7 @@ const markers = L.markerClusterGroup({
 
     return new L.DivIcon({
       html: `<div><span>${count}</span></div>`,
-      className: `marker-cluster marker-cluster-${size}`,
+      className: 'marker-cluster marker-cluster-' + size,
       iconSize: new L.Point(40, 40)
     });
   }
@@ -57,15 +50,15 @@ fetch('https://api-geo-ymve.onrender.com/dados')
     document.getElementById('loadingMessage').style.display = 'none';
   })
   .catch(err => {
-    alert("Erro ao carregar dados da API.");
+    alert("Erro ao carregar dados, tente novamente.");
     document.getElementById('loadingMessage').style.display = 'none';
-    console.error("Erro:", err);
+    console.error("Erro ao carregar pontos:", err);
   });
 
 document.getElementById('togglePontos').addEventListener('change', function () {
   this.checked ? map.addLayer(markers) : map.removeLayer(markers);
 });
 
-document.getElementById('menu-toggle').addEventListener('click', () => {
-  document.getElementById('sidebar').classList.toggle('active');
+document.getElementById('menu-toggle').addEventListener('click', function () {
+  document.getElementById('sidebar').classList.toggle('open');
 });

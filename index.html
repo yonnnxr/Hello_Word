@@ -1,36 +1,31 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-<head>
-  <meta charset="UTF-8" />
-  <title>Mapa</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
-  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css" />
-  <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.css" />
-  <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.Default.css" />
-  <link rel="stylesheet" href="style.css" />
-
-  <link rel="icon" type="image/jpeg" href="img/cau.jpg">
-</head>
-<body>
-
-  <button id="menu-toggle" aria-label="Abrir menu">☰</button>
-
-  <div id="sidebar">
-    <h2>Camadas</h2>
-    <div class="layer-toggle">
-      <input type="checkbox" id="togglePontos" checked />
-      <label for="togglePontos">Imóveis em construção</label>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Mapa</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.css" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.Default.css" />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div id="sidebar">
+      <button id="menu-toggle" class="menu-toggle">☰</button>
+      <h2>Camadas</h2>
+      <div class="layer-toggle">
+        <input type="checkbox" id="togglePontos" checked />
+        <label for="togglePontos">Imóveis em construção</label>
+      </div>
+      <div id="quantitativo">Total: <strong>0</strong></div>
     </div>
-    <div id="quantitativo">Total de imóveis: <strong>0</strong></div>
-  </div>
 
-  <div id="loadingMessage">Acordando a API...</div>
+    <div id="map"></div>
 
-  <div id="map"></div>
+    <div id="loadingMessage">Carregando...</div>
 
-  <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"></script>
-  <script src="https://unpkg.com/leaflet.markercluster@1.5.3/dist/leaflet.markercluster.js"></script>
-  <script src="script.js"></script>
-</body>
+    <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"></script>
+    <script src="https://unpkg.com/leaflet.markercluster@1.5.3/dist/leaflet.markercluster.js"></script>
+    <script src="script.js"></script>
+  </body>
 </html>
