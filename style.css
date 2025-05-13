@@ -45,10 +45,10 @@ html, body {
 .menu-toggle {
   position: absolute;
   top: 20px;
-  left: 40px;
+  left: 45px;
   font-size: 24px;
   background: white;
-  border: none;
+  border: 1px #333;
   color: #333;
   cursor: pointer;
   z-index: 2000;
