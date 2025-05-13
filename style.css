@@ -1,26 +1,38 @@
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+}
+
+#map {
+  position: absolute;
+  top: 0;
+  left: 250px;
+  width: calc(100% - 250px);
+  height: 100%;
+  z-index: 0;
+}
 
 #sidebar {
   position: absolute;
-  left: 0;
   top: 0;
+  left: 0;
   width: 250px;
   height: 100%;
-  background-color: #ffffff;
+  background: #fff;
   box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
   padding: 20px;
   box-sizing: border-box;
   z-index: 1000;
-  overflow-y: auto;
-  border-right: 1px solid #ddd;
   transition: transform 0.3s ease;
 }
-
 
 #menu-toggle {
   position: absolute;
   top: 15px;
   left: 15px;
-  z-index: 1500;
+  z-index: 1100;
   background-color: white;
   border: none;
   font-size: 24px;
@@ -30,14 +42,38 @@
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
 }
 
-
-#map {
+#loadingMessage {
   position: absolute;
-  top: 0;
-  left: 250px;
-  width: calc(100% - 250px);
-  height: 100%;
-  transition: left 0.3s ease, width 0.3s ease;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: rgba(255, 255, 255, 0.95);
+  padding: 20px 30px;
+  border-radius: 8px;
+  font-size: 16px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.2);
+  z-index: 1500;
+  display: none;
+}
+
+.marker-cluster-small {
+  background-color: rgba(181, 226, 140, 0.6);
+  color: white;
+}
+
+.marker-cluster-medium {
+  background-color: rgba(241, 211, 87, 0.6);
+  color: white;
+}
+
+.marker-cluster-large {
+  background-color: rgba(253, 156, 115, 0.6);
+  color: white;
+}
+
+.marker-cluster div {
+  border-radius: 50%;
+  border: none;
 }
 
 @media (max-width: 768px) {
