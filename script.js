@@ -1,7 +1,10 @@
 
 var map = L.map('map', {
+  center: [-22.2049, -54.8116],
+  zoom: 12,
   zoomControl: false
-}).setView([-22.2049, -54.8116], 12);
+});
+
 
 var osmLayer = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
   attribution: '© OpenStreetMap',
@@ -72,7 +75,6 @@ const menuToggle = document.getElementById('menu-toggle');
 const sidebar = document.getElementById('sidebar');
 const mapDiv = document.getElementById('map');
 
-menuToggle.addEventListener('click', () => {
-  sidebar.classList.toggle('active');
-  mapDiv.classList.toggle('sidebar-open');
+document.getElementById('menu-toggle').addEventListener('click', () => {
+  document.getElementById('sidebar').classList.toggle('active');
 });
