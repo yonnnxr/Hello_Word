@@ -64,8 +64,9 @@ fetch('https://api-geo-ymve.onrender.com/dados')
 document.getElementById('togglePontos').addEventListener('change', function () {
   this.checked ? map.addLayer(markers) : map.removeLayer(markers);
 });
+
+// SIDEBAR CONTROLES
 const sidebar = document.getElementById('sidebar');
-const mapDiv = document.getElementById('map');
 const menuToggle = document.getElementById('menu-toggle');
 const closeBtn = document.getElementById('close-btn');
 
