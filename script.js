@@ -1,9 +1,7 @@
 
 var map = L.map('map', {
-  center: [-22.2049, -54.8116],
-  zoom: 12
-});
-
+  zoomControl: false
+}).setView([-22.2049, -54.8116], 12);
 
 var osmLayer = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
   attribution: '© OpenStreetMap',
