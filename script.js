@@ -53,6 +53,9 @@ fetch('https://api-geo-ymve.onrender.com/dados')
     });
     markers.addLayer(pontosLayer);
     map.addLayer(markers);
+
+    const count = data.features.length;
+    document.querySelector('#quantitativo strong').textContent = count;
   })
   .catch(err => console.error("Erro ao carregar dados:", err));
 document.getElementById('togglePontos').addEventListener('change', function () {
