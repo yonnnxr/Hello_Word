@@ -80,7 +80,10 @@ html {
   background: none;
   color: #333;
   cursor: pointer;
-  display: none;
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  z-index: 1100;
 }
 
 @media (max-width: 768px) {
@@ -97,5 +100,11 @@ html {
   }
   #menu-toggle {
     display: block;
+  }
+}
+
+@media (min-width: 769px) {
+  #menu-toggle {
+    display: none;
   }
 }
